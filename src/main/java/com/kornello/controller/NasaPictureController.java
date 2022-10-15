@@ -23,8 +23,7 @@ public class NasaPictureController {
     }};
 
     @GetMapping({"/mars/pictures/largest/{sol}", "/mars/pictures/largest/{sol}/{camera}"})
-    public ResponseEntity<?> getLargestPicture(@PathVariable String sol, @PathVariable(required = false) String cam) {
-        Picture largestPic = service.getLargestPic(sol, cam);
-        return new ResponseEntity<>(largestPic.getImg(), headers, OK);
+    public ResponseEntity<byte[]> getLargestPicture(@PathVariable String sol, @PathVariable(required = false) String cam) {
+        return new ResponseEntity<>(service.getLargestPic(sol, cam).getImg(), headers, OK);
     }
 }

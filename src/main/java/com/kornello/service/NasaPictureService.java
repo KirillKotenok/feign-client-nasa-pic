@@ -16,10 +16,11 @@ public class NasaPictureService {
 
     private final FeignPictureService pictureService;
     private final RestTemplate template;
+    private static final String API_KEY = "6tttT1IDPRn64RM1YuKi6roj6yYforNpZ4eejugS";
 
     @Cacheable("largestPicture")
     public Picture getLargestPic(String sol, String cam) {
-        return pictureService.getPicturesBySolAndCamera(sol, cam)
+        return pictureService.getPicturesBySolAndCamera(API_KEY, sol, cam)
                 .findValuesAsText("img_src")
                 .stream()
                 .map(Picture::new)
